@@ -1,0 +1,5 @@
+const http=require('node:http'),fs=require('node:fs'),path=require('node:path');
+const base=path.resolve(__dirname,'../web');
+const mime={'.html':'text/html','.css':'text/css','.js':'text/javascript','.ttf':'font/ttf','.txt':'text/plain'};
+const server=http.createServer((req,res)=>{try{const url=new URL(req.url,'http://127.0.0.1:8769'),name=url.pathname==='/'?'index.html':decodeURIComponent(url.pathname).replace(/^\//,''),file=path.resolve(base,name);if(!file.startsWith(base+path.sep)||!fs.statSync(file).isFile()){res.writeHead(404);res.end();return;}let data=fs.readFileSync(file);if(name==='index.html'&&url.searchParams.has('previewAudio'))data=Buffer.from(data.toString().replace('</body>',"<script>addEventListener('load',()=>document.getElementById('audioTab').click())</script></body>"));res.setHeader('Content-Type',mime[path.extname(file)]||'application/octet-stream');res.end(data);}catch(e){res.writeHead(404);res.end();}});
+server.listen(8769,'127.0.0.1',()=>console.log('Sift local preview 8769, process '+process.pid));setTimeout(()=>server.close(),180000).unref();

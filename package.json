@@ -1,0 +1,5 @@
+{
+  "name":"sift-rank-studio","version":"1.0.0","private":true,
+  "scripts":{"test":"node --test tests/*.test.cjs","bundle":"node scripts/bundle.cjs"},
+  "dependencies":{"ml-matrix":"6.15.1"},"devDependencies":{"esbuild":"0.25.12"}
+}

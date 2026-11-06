@@ -1,0 +1,9 @@
+<resources>
+ <style name="Theme.Compressor" parent="android:style/Theme.Material.NoActionBar">
+  <item name="android:windowBackground">#213448</item>
+  <item name="android:statusBarColor">#213448</item>
+  <item name="android:navigationBarColor">#213448</item>
+  <item name="android:windowLightStatusBar">false</item>
+  <item name="android:colorAccent">#94B4C1</item>
+ </style>
+</resources>

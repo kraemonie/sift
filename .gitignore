@@ -1,0 +1,29 @@
+node_modules/
+.gradle/
+.idea/
+**/build/
+local.properties
+artifacts/
+*.apk
+
+# Local tooling, credentials and device-only evidence
+.agents/
+skills-lock.json
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.p12
+*.pem
+*.log
+HANDOFF.md
+docs/*ui.xml
+docs/*drag*.xml
+docs/*qa.json
+docs/sift-math-popup.png
+
+# Device screenshots can include personal overlays.
+docs/sift-*.png
+!docs/sift-icon-options.png
+!docs/sift-icon-v112.png
