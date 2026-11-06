@@ -18,6 +18,8 @@ public class StudioTest {
  private void until(String expression)throws Exception{long end=System.currentTimeMillis()+45000;while(System.currentTimeMillis()<end){if("true".equals(js(expression)))return;Thread.sleep(150);}fail("Not ready: "+expression+" / "+js("document.getElementById('status').textContent"));}
  private void capture(String name)throws Exception{Thread.sleep(300);android.graphics.Bitmap image=InstrumentationRegistry.getInstrumentation().getUiAutomation().takeScreenshot();try(java.io.FileOutputStream out=new java.io.FileOutputStream(new java.io.File(rule.getActivity().getExternalFilesDir(null),name))){image.compress(android.graphics.Bitmap.CompressFormat.PNG,100,out);}image.recycle();try(android.os.ParcelFileDescriptor fd=InstrumentationRegistry.getInstrumentation().getUiAutomation().executeShellCommand("cp "+new java.io.File(rule.getActivity().getExternalFilesDir(null),name).getAbsolutePath()+" /sdcard/Download/"+name);java.io.FileInputStream input=new java.io.FileInputStream(fd.getFileDescriptor())){while(input.read()!=-1){}}}
  @Test public void studioFlow()throws Exception{
+  until("!!document.getElementById('welcomeScreen')");
+  js("if(!document.getElementById('welcomeScreen').hidden)document.getElementById('skipWelcome').click()");
   until("document.getElementById('statePill')&&document.getElementById('statePill').textContent==='Ready'");
   assertEquals("\"Sift · Low-rank studio\"",js("document.title"));
   assertEquals("true",js("document.documentElement.scrollWidth<=innerWidth+1"));

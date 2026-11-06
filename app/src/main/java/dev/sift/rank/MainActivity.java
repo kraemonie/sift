@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
    Uri target=data.getData();new Thread(()->{try(OutputStream stream=getContentResolver().openOutputStream(target)){if(stream==null)throw new java.io.IOException();stream.write(payload);runOnUiThread(()->notifySave(true,"Saved successfully."));}catch(Exception ex){runOnUiThread(()->notifySave(false,"Could not save. Try another location."));}},"sift-export").start();
   }
  }
- private void goBack(){web.evaluateJavascript("(function(){var about=document.getElementById('aboutPanel');if(about&&!about.hidden){window.closeSiftAbout();return true;}var p=document.getElementById('mathPanel');if(p&&!p.hidden){window.closeMath();return true;}return false;})()",result->{if(!"true".equals(result))finish();});}
+ private void goBack(){web.evaluateJavascript("(function(){if(window.handleSiftIntroBack&&window.handleSiftIntroBack())return true;var about=document.getElementById('aboutPanel');if(about&&!about.hidden){window.closeSiftAbout();return true;}var p=document.getElementById('mathPanel');if(p&&!p.hidden){window.closeMath();return true;}return false;})()",result->{if(!"true".equals(result))finish();});}
  @Override public void onBackPressed(){goBack();}
  @Override protected void onDestroy(){if(chooser!=null)chooser.onReceiveValue(null);if(web!=null){web.removeJavascriptInterface("SiftBridge");((FrameLayout)web.getParent()).removeView(web);web.destroy();web=null;}super.onDestroy();}
 }

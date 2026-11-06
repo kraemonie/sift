@@ -27,3 +27,13 @@ The Math button opens a dismissible popup. Hero artwork floats gently. The rank 
 About Sift is available in the footer and closes with Close, outside tap, Escape or Android Back. It explains offline processing, export behavior and processing limits.
 
 Imported photos are displayed at their original intrinsic resolution on the reference side and in the initial preview, with no rank adjustment applied automatically. Move the rank slider or select a preset to generate the compressed working reconstruction. The reference remains full resolution. SVD processing and PNG exports still use a working copy up to 192px on the longest side; this is stated beneath the preview. Archives do not include the original full-resolution source. Exports become available once a rank has been applied.
+
+## Welcome and personal workspaces (1.4.0)
+
+First launch opens three swipeable photo/audio/rank slides with Skip, Next and Get started. Completion is saved locally; About Sift → Replay welcome opens them again. Back space is reserved so the main button stays aligned across all slides. Native Back and reduced-motion settings are supported.
+
+Image and Audio retain their own selected file, rank and comparison position during the current app session. Switching tabs restores that workspace; it no longer replaces an upload with a sample. Restoration also preserves the chosen rank of opened factor archives, including rapid switches during decoding/analysis. Closing or restarting the app still starts a fresh session.
+
+The photo sample is the owner-supplied cat photo, copied unchanged. Audio uses the public-domain “Meow of a pleading cat” recording by Heismark from Wikimedia Commons; see web/samples/CREDITS.md. It is a separate recording, not the voice of the pictured cat. Both samples are bundled offline.
+
+Play/Pause is centered on each record. Seek bars and elapsed/total time sit below the waveforms. The original and output cannot play simultaneously, and playback pauses on tab changes. The visual Math popup explains the formula, factors, and selected rank.
