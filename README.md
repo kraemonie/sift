@@ -21,3 +21,9 @@ Sift uses navy controls, clean white previews and neon teal rank controls throug
 Six core tests pass. Android 9/API28 StudioTest passes: image/audio samples, rank-one/full-rank behavior, archive round trip, mathematical help/native Back, and no horizontal overflow at 320/360/412 CSS-pixel widths. Debug assembly and Android lint complete successfully; lint retains advisory SDK/toolchain warnings. Sift 1.2.2 is installed and launched successfully on the connected Xiaomi, including the S icon and centered mode control. Full flow verification used the Android 9 emulator. See docs/release-1.2.2.md for the current APK hash and evidence. Run scripts/test-built.ps1 after building both APKs to avoid running Gradle and the emulator together on a memory-constrained PC.
 
 The Math button opens a dismissible popup. Hero artwork floats gently. The rank slider glows while adjusting, with teal retained-spectrum bars. Motion respects the device reduced-motion preference.
+
+## About and original-photo preview (1.3.0)
+
+About Sift is available in the footer and closes with Close, outside tap, Escape or Android Back. It explains offline processing, export behavior and processing limits.
+
+Imported photos are displayed at their original intrinsic resolution on the reference side and in the initial preview, with no rank adjustment applied automatically. Move the rank slider or select a preset to generate the compressed working reconstruction. The reference remains full resolution. SVD processing and PNG exports still use a working copy up to 192px on the longest side; this is stated beneath the preview. Archives do not include the original full-resolution source. Exports become available once a rank has been applied.

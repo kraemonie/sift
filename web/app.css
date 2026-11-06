@@ -63,3 +63,5 @@ body,body[data-mode=audio]{--meter:var(--sift-neon);background:#F5F7FA}
 .control-panel.rank-changing .rank-number{color:var(--sift-neon);text-shadow:0 0 18px #22D3BE33}
 .control-panel .rank-number{transition:color .2s,text-shadow .2s}
 @media(max-width:760px){.preview-panel{padding:18px 12px}.image-labels{top:12px;left:12px;right:12px}}
+
+.about-button{min-height:44px;background:none;border:1px solid var(--sift-line);border-radius:10px;padding:8px 13px;color:var(--sift-muted);font-size:12px}.about-open{overflow:hidden}footer{align-items:center;flex-wrap:wrap}.original-photo,.original-result{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain}.original-photo{z-index:1}.image-frame #resultCanvas{z-index:2}.original-result{z-index:3}.image-frame .compare-line{z-index:4}.image-labels{z-index:5}.processing-overlay{z-index:6}.image-frame{background:#fff}
