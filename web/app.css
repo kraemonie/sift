@@ -80,3 +80,13 @@ body,body[data-mode=audio]{--meter:var(--sift-neon);background:#F5F7FA}
 .audio-seek::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;margin-top:-5.5px;border:0;border-radius:50%;background:#22D3BE;box-shadow:0 0 0 3px #22D3BE1A}
 .audio-seek::-moz-range-track{height:5px;background:#557086;border-radius:8px}.audio-seek::-moz-range-progress{height:5px;background:#22D3BE;border-radius:8px}.audio-seek::-moz-range-thumb{width:16px;height:16px;background:#22D3BE;border:0;border-radius:50%}
 .math-formula>b{margin:0 4px}
+
+/* Filled About actions share the studio palette. */
+#updateApp,#replayIntro{font-weight:650;min-height:48px;padding:12px 20px;border-radius:14px;transition:background .18s ease,transform .18s ease;}
+#updateApp{background:#22D3BE;border-color:#22D3BE;color:#102D3D;}
+#replayIntro{background:#547792;border-color:#547792;color:#FFFFFF;}
+#updateApp:hover{background:#51DFCE;border-color:#51DFCE;}
+#replayIntro:hover{background:#43647E;border-color:#43647E;}
+#updateApp:active,#replayIntro:active{transform:scale(.98);}
+#updateApp:focus-visible,#replayIntro:focus-visible{outline:3px solid #213448;outline-offset:3px;}
+@media(prefers-reduced-motion:reduce){#updateApp,#replayIntro{transition:none;}#updateApp:active,#replayIntro:active{transform:none;}}
