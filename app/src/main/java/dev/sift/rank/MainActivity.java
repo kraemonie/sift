@@ -51,6 +51,17 @@ public class MainActivity extends Activity {
   if(Build.VERSION.SDK_INT>=33)getOnBackInvokedDispatcher().registerOnBackInvokedCallback(android.window.OnBackInvokedDispatcher.PRIORITY_DEFAULT,this::goBack);
  }
  private class SaveBridge {
+  @JavascriptInterface public boolean needsWelcome(){return !getSharedPreferences("sift_intro",MODE_PRIVATE).getBoolean("completed",false);}
+  @JavascriptInterface public void completeWelcome(){getSharedPreferences("sift_intro",MODE_PRIVATE).edit().putBoolean("completed",true).apply();}
+
+  @JavascriptInterface public void openUpdate(){
+   runOnUiThread(()->{
+    if(!PAGE.equals(web.getUrl()))return;
+    try{startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://drive.google.com/file/d/1aCuoi5bPgL_f5V32kxIU5uVWI-VVJCub/view")));}
+    catch(android.content.ActivityNotFoundException ex){web.evaluateJavascript("document.getElementById('updateStatus').textContent='Install a browser or Google Drive to open the update download.'",null);}
+   });
+  }
+
   @JavascriptInterface public void saveFile(String name,String mime,String encoded){
    if(name==null||encoded==null||encoded.length()>12*1024*1024||!("image/png".equals(mime)||"audio/wav".equals(mime)||"application/octet-stream".equals(mime))){runOnUiThread(()->notifySave(false,"Invalid export. Try again."));return;}
    final byte[] data;

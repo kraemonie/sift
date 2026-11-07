@@ -37,3 +37,7 @@ Image and Audio retain their own selected file, rank and comparison position dur
 The photo sample is the owner-supplied cat photo, copied unchanged. Audio uses the public-domain “Meow of a pleading cat” recording by Heismark from Wikimedia Commons; see web/samples/CREDITS.md. It is a separate recording, not the voice of the pictured cat. Both samples are bundled offline.
 
 Play/Pause is centered on each record. Seek bars and elapsed/total time sit below the waveforms. The original and output cannot play simultaneously, and playback pauses on tab changes. The visual Math popup explains the formula, factors, and selected rank.
+
+## Updates and welcome (1.4.1)
+
+About Sift → Get latest update opens the shared Drive APK using Android. Download and approve installation to update while retaining app data. This does not poll versions or install silently. Welcome completion is stored in Android preferences for each installation; existing users see it once after this update. Replay welcome remains available.
