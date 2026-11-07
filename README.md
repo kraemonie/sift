@@ -1,43 +1,37 @@
 # Sift
 
-An independent, offline Android studio for image/audio SVD and low-rank approximation. Open this folder in Android Studio. The folder remains named compressor; the installed app is Sift (dev.sift.rank).
+An offline Android studio for exploring SVD and low-rank approximation on photos and sound. Pick a file, move the rank slider, and compare what changes. Nothing leaves the device: the app asks for no Internet or storage permissions.
 
-## Run
+| Phone, light | Phone, dark | Audio |
+| --- | --- | --- |
+| ![Phone, light](docs/screenshots/phone-light.png) | ![Phone, dark](docs/screenshots/phone-dark.png) | ![Audio, dark](docs/screenshots/phone-audio-dark.png) |
 
-Use scripts/build.ps1 to run the six math tests, bundle local assets, build the debug APK and run Android lint. Use scripts/build.ps1 -Test with one running Android emulator to run StudioTest. After instrumentation teardown, reinstall app/build/outputs/apk/debug/app-debug.apk if needed.
+![Desktop preview](docs/screenshots/desktop-light.png)
 
-The Java 17 runtime is under %LOCALAPPDATA%/CompressorToolchain/java. Android SDK is under %LOCALAPPDATA%/Android/Sdk. The app requests no Internet or storage permissions. Android's document picker imports and saves chosen files.
+Screenshots are the web interface rendered in a browser at phone and desktop sizes.
 
 ## What it does
 
-Import an image, audio clip or .svdc archive. Adjust retained rank; compare the reconstruction, energy, error and actual factor archive bytes. Export .svdc factors or reconstructed PNG/WAV. Images use up to 192px on their longest edge, composited on white. Audio uses up to the first eight seconds, resampled to 16 kHz mono in 128-sample rows.
+- Import an image, an audio clip or a saved `.svdc` archive (up to 20 MB).
+- Adjust the retained rank and compare the reconstruction, energy kept, error and the real size of the factor archive.
+- Export `.svdc` factors, or the reconstruction as PNG / WAV. Share the PNG / WAV from the Android share sheet.
+- Photos: compare on a draggable split. Rank changes use a working copy up to 192px on the longest edge, composited on white.
+- Audio: first 8 seconds, resampled to 16 kHz mono, arranged in 128-sample rows.
 
-Savings compare factor bytes with raw working pixels/PCM, not the original JPEG/MP3. Full rank quantized archives are not bit-exact originals. Energy is a matrix measure, not perceptual quality. Exported PNG/WAV may be larger than the original encoded file. The tool is educational, not a replacement for standard image/audio codecs.
+Savings compare factor bytes with raw working pixels or PCM, not with your original JPEG or MP3, which may already be smaller. Energy is a matrix measure, not perceived quality. Full-rank quantized archives are not bit-exact originals. Sift is educational, not a replacement for standard codecs.
 
-## Branding and verification
+## Run it
 
-Sift uses navy controls, clean white previews and neon teal rank controls throughout both photo and audio workspaces, with Space Grotesk headings and a matching ribbon S adaptive vector icon. Select file is centered above the preview; reconstructed media downloads sit directly below their output. Drag directly on the photo to compare, or focus the comparison with Tab and use arrow keys. Mode changes animate smoothly and respect reduced motion.
+The Android Studio project root is this repository (the installed app is Sift, `dev.sift.rank`). The folder may still be called `compressor` on the author's machine.
 
-Six core tests pass. Android 9/API28 StudioTest passes: image/audio samples, rank-one/full-rank behavior, archive round trip, mathematical help/native Back, and no horizontal overflow at 320/360/412 CSS-pixel widths. Debug assembly and Android lint complete successfully; lint retains advisory SDK/toolchain warnings. Sift 1.2.2 is installed and launched successfully on the connected Xiaomi, including the S icon and centered mode control. Full flow verification used the Android 9 emulator. See docs/release-1.2.2.md for the current APK hash and evidence. Run scripts/test-built.ps1 after building both APKs to avoid running Gradle and the emulator together on a memory-constrained PC.
+- Windows: `scripts/build.ps1` runs the math tests, bundles the web assets, builds the debug APK and runs lint. Add `-Test` with one running emulator to run `StudioTest`. Java 17 and the Android SDK are expected under `%LOCALAPPDATA%` (see `scripts/setup-android.ps1`).
+- Any OS: `npm install`, `npm test` for the math tests, then `./gradlew assembleDebug` (or open the folder in Android Studio).
+- The interface in `web/` also opens in a normal browser through any static server, for quick design checks.
 
-The Math button opens a dismissible popup. Hero artwork floats gently. The rank slider glows while adjusting, with teal retained-spectrum bars. Motion respects the device reduced-motion preference.
+## Versions
 
-## About and original-photo preview (1.3.0)
+Release notes live in `docs/` (latest: [release-1.5.0.md](docs/release-1.5.0.md)). Design notes: `docs/design.md`. The version shown in About Sift matches `app/build.gradle`.
 
-About Sift is available in the footer and closes with Close, outside tap, Escape or Android Back. It explains offline processing, export behavior and processing limits.
+## Credits
 
-Imported photos are displayed at their original intrinsic resolution on the reference side and in the initial preview, with no rank adjustment applied automatically. Move the rank slider or select a preset to generate the compressed working reconstruction. The reference remains full resolution. SVD processing and PNG exports still use a working copy up to 192px on the longest side; this is stated beneath the preview. Archives do not include the original full-resolution source. Exports become available once a rank has been applied.
-
-## Welcome and personal workspaces (1.4.0)
-
-First launch opens three swipeable photo/audio/rank slides with Skip, Next and Get started. Completion is saved locally; About Sift → Replay welcome opens them again. Back space is reserved so the main button stays aligned across all slides. Native Back and reduced-motion settings are supported.
-
-Image and Audio retain their own selected file, rank and comparison position during the current app session. Switching tabs restores that workspace; it no longer replaces an upload with a sample. Restoration also preserves the chosen rank of opened factor archives, including rapid switches during decoding/analysis. Closing or restarting the app still starts a fresh session.
-
-The photo sample is the owner-supplied cat photo, copied unchanged. Audio uses the public-domain “Meow of a pleading cat” recording by Heismark from Wikimedia Commons; see web/samples/CREDITS.md. It is a separate recording, not the voice of the pictured cat. Both samples are bundled offline.
-
-Play/Pause is centered on each record. Seek bars and elapsed/total time sit below the waveforms. The original and output cannot play simultaneously, and playback pauses on tab changes. The visual Math popup explains the formula, factors, and selected rank.
-
-## Updates and welcome (1.4.1)
-
-About Sift → Get latest update opens the shared Drive APK using Android. Download and approve installation to update while retaining app data. This does not poll versions or install silently. Welcome completion is stored in Android preferences for each installation; existing users see it once after this update. Replay welcome remains available.
+Space Grotesk, ml-matrix. The meow sample is by Heismark (Wikimedia Commons, public domain); see `web/samples/CREDITS.md`.
